@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide & Seek Password</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 62.5%;
+            font-family: Arial, Helvetica, sans-serif;
+            border: none;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            height: 10rem;
+            width: 40rem;
+            border: 1px solid black;
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container div input {
+            height: 5rem;
+            width: 65%;
+            font-size: 1.3rem;
+            padding: 0.5rem;
+        }
+
+        .container div button {
+            height: 5rem;
+            width: 30%;
+            font-size: 1.6rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: #333;
+            color: antiquewhite;
+            cursor: pointer;
+        }
+        #strengh{
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <input type="password" id="pass" placeholder="Enter your password">
+            <button>copy</button>
+        </div>
+        <span id="strengh"></span>
+    </div>
+    <script>
+        let exam = document.getElementById('strengh');
+        let input = document.getElementById('pass');
+
+        input.addEventListener('input', () => {
+
+    let length = input.value.length;
+
+    if (length === 0) {
+        exam.innerText = "";
+        input.style.border = "";
+    }
+    else if (length <= 4) {
+        exam.innerText = "Weak";
+        exam.style.color = "red";
+    }
+    else if (length <= 7) {
+        exam.innerText = "Medium";
+        exam.style.color = "orange";
+    }
+    else {
+        exam.innerText = "Strong";
+        exam.style.color = "green";
+    }
+
+});
+
+    </script>
+</body>
+
+</html>
+
+

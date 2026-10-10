@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: "Roboto";
+    font-size: 62.5%;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+body{
+    background: linear-gradient(90deg,#5478FF,#111FA2);
+    min-height: 100vh;
+}
+header{
+    padding: 2rem;
+    background-color: #33333305;
+    box-shadow: 0 0 10px #333;
+    background: linear-gradient(90deg,#5478FF,#111FA2);
+}
+nav{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+.logo{
+    font-size: 5rem;
+    font-weight: bold;
+    color: aliceblue;
+}
+.logo i{
+    color: aquamarine;
+    font-size: 5rem;
+}
+ul{
+    list-style-type:none ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+a:link,
+a:visited{
+    color: aliceblue;
+}
+li a{
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+button.btn{
+    padding: 1rem 3.5rem;
+    font-size: 1.8rem;
+    background-color: #FF3E9B;
+    color: aliceblue;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+}
+section main{
+    width: 80%;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.content{
+    width: 50%;
+}
+.content h1{
+    font-size: 4.5rem;
+    color: aliceblue;
+}
+.content p {
+    font-size: 1.5rem;
+    color: aliceblue;
+    margin: 1.5rem 0;
+}
+.content button.btn-1{
+    padding:1.5rem 5rem ;
+    border-radius:5rem ;
+    -webkit-border-radius:5rem ;
+    -moz-border-radius:5rem ;
+    -ms-border-radius:5rem ;
+    -o-border-radius:5rem ;
+}
+main  .image{
+    width: 50%;
+    height: 70vh;
+    border-radius: 3rem;
+    background:
+    url('https://i.pinimg.com/736x/04/39/e4/0439e4ac76b062cd7278e26e07877cdd.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+    -webkit-border-radius: 3rem;
+    -moz-border-radius: 3rem;
+    -ms-border-radius: 3rem;
+    -o-border-radius: 3rem;
+}
+section .subsection{
+    width: 80%;
+    margin: 0 auto;
+    padding: 3rem;
+    display: flex;
+}
+.subsection .boxes h1{
+    font-size: 2rem;
+    color: aliceblue;
+}
+.subsection .boxes h1 i{
+    font-size: 2.5rem;
+}
+.subsection .boxes p{
+    margin: 0.5rem;
+    color: aliceblue;
+    font-size: 1.5rem;
+}

@@ -1,0 +1,88 @@
+section#contact{
+    height: auto;
+    width: 100%;
+    padding: 4rem 2rem;
+    display: flex;
+    /* gap: 2rem; */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+section#contact .image{
+         background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+     url('https://microsoft.design/wp-content/uploads/2024/06/feature-17.jpg') 
+     no-repeat center center/cover;
+        height: 80vh;
+        width: 30%;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+}
+section#contact form{
+    height: 80vh;
+    width: 30%;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+section#contact form textarea{
+    resize: vertical;
+    min-height: 150px;
+}
+
+section#contact form label{
+    font-size: 1.4rem;
+    color: #333;
+}
+section#contact form input, section#contact form textarea{
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    font-size: 1.4rem;
+}
+section#contact form h2{
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+}
+section#contact form button{
+    padding:1.5rem 2rem;
+    background-color: #ff6347;
+    color: #fff;
+    font-size: 1.6rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -ms-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+}
+section#contact form button:hover{
+    background-color: #ff4500;
+}
+@media (max-width: 900px){
+    section#contact{
+        flex-direction: column;
+        gap: 2rem;
+    }
+    section#contact .image, section#contact form{
+        width: 100%;
+    }
+}

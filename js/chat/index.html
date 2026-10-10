@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebula · interactive landing</title>
+  <!-- Font Awesome for icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #0b0d14;
+      color: #eef2ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .landing-container {
+      max-width: 1280px;
+      width: 100%;
+      background: rgba(20, 25, 40, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+      padding: 2rem 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    /* dynamic JSON-driven grid */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.2rem;
+    }
+
+    .hero-content {
+      flex: 1 1 300px;
+    }
+
+    .hero-badge {
+      background: linear-gradient(135deg, #4f46e5, #a855f7);
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 0.4px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(110deg, #ffffff, #c7d2fe);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subheadline {
+      font-size: 1.1rem;
+      color: #a0abcf;
+      max-width: 500px;
+      margin-bottom: 2rem;
+      border-left: 3px solid #6366f1;
+      padding-left: 1.2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: #0e1222;
+      box-shadow: 0 8px 18px -6px rgba(0,0,0,0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 8px 20px -5px #4f46e5;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(120deg, #4f46e5, #7c3aed);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -5px #4338ca;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #3a4055;
+      color: #cdd6ff;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      border-color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* JSON features grid — fully interactive by JS */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 2rem;
+      padding: 1.8rem 1.5rem;
+      transition: 0.25s ease;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .feature-card:hover {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: #6366f1;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 25px -15px #312e81;
+    }
+
+    .feature-icon {
+      font-size: 2.2rem;
+      background: #171c2e;
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      margin-bottom: 1.2rem;
+      color: #a5b4fc;
+      border: 1px solid #2d3655;
+      transition: 0.2s;
+    }
+
+    .feature-card:hover .feature-icon {
+      background: #262f4a;
+      color: #c7d2fe;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #f0f3ff;
+    }
+
+    .feature-card p {
+      color: #98a4c5;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* interactive stats / demo section */
+    .stats-section {
+      background: linear-gradient(145deg, #0f1424, #171e33);
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #29304b;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a5b4fc, #e0e7ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #7f8bb0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .interactive-toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .switch {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      background: #303a54;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .switch.on {
+      background: #6366f1;
+    }
+
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    }
+
+    .switch.on::after {
+      left: 22px;
+    }
+
+    .json-viewer {
+      background: #0c1020;
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: #a5f3fc;
+      border: 1px solid #2d3655;
+      max-width: 420px;
+      white-space: pre-wrap;
+      box-shadow: 0 8px 20px -10px #000;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .json-viewer:hover {
+      border-color: #818cf8;
+      background: #121a30;
+    }
+
+    .footer-note {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: #5b6480;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1.5rem;
+    }
+
+    .footer-note i {
+      margin-right: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .landing-container {
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-content">
+        <span class="hero-badge"><i class="fas fa-bolt" style="margin-right:8px;"></i>Next-gen AI</span>
+        <h1>Launch your product<br>into the future.</h1>
+        <p class="subheadline">Create, ship, and scale — with an interface that adapts to your workflow.</p>
+        <div class="cta-group">
+          <button class="btn btn-primary" id="getStartedBtn"><i class="fas fa-rocket"></i> Get started</button>
+          <button class="btn btn-outline" id="docsBtn"><i class="fas fa-book-open"></i> Live demo</button>
+        </div>
+      </div>
+      <!-- JSON viewer (interactive, updates from JS) -->
+      <div class="json-viewer" id="jsonViewer" title="Click to update data">
+        <pre id="jsonData">loading...</pre>
+      </div>
+    </div>
+
+    <!-- FEATURES GRID (initially populated via JSON) -->
+    <div id="featuresContainer" class="features-grid"></div>
+
+    <!-- STATS + interactive toggle -->
+    <div class="stats-section">
+      <div class="stat-item">
+        <div class="stat-value" id="statUsers">12k+</div>
+        <div class="stat-label">Active users</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="statUptime">99.98%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+      <div class="interactive-toggle">
+        <span style="color:#b2c0e0;font-size:0.9rem;"><i class="fas fa-sync-alt"></i> Real-time JSON</span>
+        <div class="switch" id="realtimeSwitch" title="Toggle real-time JSON updates"></div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <span><i class="far fa-copyright"></i> 2026 Nebula Labs</span>
+      <span><i class="fas fa-code"></i> interactive HTML + CSS + JS + JSON</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // **************************
+      // JSON DATA (initial content)
+      // **************************
+      const featureData = [
+        {
+          icon: "fa-solid fa-shield-halved",
+          title: "Security first",
+          description: "Bank-grade encryption, SOC2, and real-time threat monitoring."
+        },
+        {
+          icon: "fa-solid fa-chart-line",
+          title: "Analytics",
+          description: "Custom dashboards with AI insights and anomaly detection."
+        },
+        {
+          icon: "fa-solid fa-bolt",
+          title: "Instant deploy",
+          description: "One-click deploy to 300+ edge locations worldwide."
+        },
+        {
+          icon: "fa-solid fa-palette",
+          title: "Adaptive UI",
+          description: "Dynamic interface driven by live JSON config."
+        }
+      ];
+
+      // Extra variant data for interactive update (same structure)
+      const additionalFeatures = [
+        {
+          icon: "fa-solid fa-cloud",
+          title: "Cloud sync",
+          description: "Seamless sync between web, mobile, and desktop."
+        },
+        {
+          icon: "fa-solid fa-robot",
+          title: "AI assistant",
+          description: "Automate workflows with natural language commands."
+        }
+      ];
+
+      // Helper: render features into grid (from JSON array)
+      function renderFeatures(featuresArray) {
+        const container = document.getElementById('featuresContainer');
+        if (!container) return;
+        container.innerHTML = featuresArray.map(f => `
+          <div class="feature-card" data-title="${f.title}">
+            <div class="feature-icon"><i class="${f.icon}"></i></div>
+            <h3>${f.title}</h3>
+            <p>${f.description}</p>
+          </div>
+        `).join('');
+      }
+
+      // Initialize default features
+      renderFeatures(featureData);
+
+      // JSON view updater (shows current JSON in code block)
+      function updateJsonViewer(data) {
+        const pre = document.getElementById('jsonData');
+        if (pre) {
+          pre.textContent = JSON.stringify(data, null, 2);
+        }
+      }
+
+      // initial JSON object
+      let currentJsonState = {
+        "productName": "NebulaOS",
+        "version": "2.4.1",
+        "features": featureData.map(f => ({ title: f.title, icon: f.icon }))
+      };
+      updateJsonViewer(currentJsonState);
+
+      // *********** INTERACTIVE ACTIONS **************
+
+      // 1. Click on JSON viewer -> updates data (rotates through variants)
+      const jsonViewerEl = document.getElementById('jsonViewer');
+      let clickCount = 0;
+      if (jsonViewerEl) {
+        jsonViewerEl.addEventListener('click', () => {
+          clickCount++;
+          if (clickCount % 2 === 1) {
+            // alter JSON state and render new feature set
+            currentJsonState = {
+              "productName": "NebulaOS Pro",
+              "version": "3.0.0-beta",
+              "features": additionalFeatures.map(f => ({ title: f.title, icon: f.icon }))
+            };
+            renderFeatures(additionalFeatures);
+            updateJsonViewer(currentJsonState);
+          } else {
+            // revert to original
+            currentJsonState = {
+              "productName": "NebulaOS",
+              "version": "2.4.1",
+              "features": featureData.map(f => ({ title: f.title, icon: f.icon }))
+            };
+            renderFeatures(featureData);
+            updateJsonViewer(currentJsonState);
+          }
+        });
+      }
+
+      // 2. Real-time switch toggle (switch state changes and updates stats + maybe JSON)
+      const realtimeSwitch = document.getElementById('realtimeSwitch');
+      let isRealtimeOn = false;
+
+      if (realtimeSwitch) {
+        realtimeSwitch.addEventListener('click', function(e) {
+          e.stopPropagation();
+          isRealtimeOn = !isRealtimeOn;
+          realtimeSwitch.classList.toggle('on', isRealtimeOn);
+          
+          // update stat values / dynamic behavior
+          const statUsers = document.getElementById('statUsers');
+          const statUptime = document.getElementById('statUptime');
+          
+          if (isRealtimeOn) {
+            statUsers.textContent = '15.2k+';
+            statUptime.textContent = '99.99%';
+            // also update json viewer to reflect live mode
+            if (clickCount % 2 === 0) {
+              // if current view is default, we show live snapshot
+              currentJsonState = {
+                "productName": "NebulaOS",
+                "version": "2.4.1",
+                "live_mode": true,
+                "stats": { "users": "15.2k+", "uptime": "99.99%" }
+              };
+            } else {
+              currentJsonState = {
+                "productName": "NebulaOS Pro",
+                "version": "3.0.0-beta",
+                "live_mode": true,
+                "stats": { "users": "15.2k+", "uptime": "99.99%" }
+              };
+            }
+            updateJsonViewer(currentJsonState);
+          } else {
+            statUsers.textContent = '12k+';
+            statUptime.textContent = '99.98%';
+            // reset json to previous state based on clickCount parity
+            if (clickCount % 2 === 0) {
+              currentJsonState = {
+                "productName": "NebulaOS",
+                "version": "2.4.1",
+                "features": featureData.map(f => ({ title: f.title, icon: f.icon }))
+              };
+            } else {
+              currentJsonState = {
+                "productName": "NebulaOS Pro",
+                "version": "3.0.0-beta",
+                "features": additionalFeatures.map(f => ({ title: f.title, icon: f.icon }))
+              };
+            }
+            updateJsonViewer(currentJsonState);
+          }
+        });
+      }
+
+      // 3. Get Started button: show toast-like interaction (pure JS feedback)
+      const getStartedBtn = document.getElementById('getStartedBtn');
+      if (getStartedBtn) {
+        getStartedBtn.addEventListener('click', () => {
+          // subtle UI feedback: change text briefly
+          const originalText = getStartedBtn.innerHTML;
+          getStartedBtn.innerHTML = '<i class="fas fa-check-circle"></i> Launching...';
+          getStartedBtn.disabled = true;
+          setTimeout(() => {
+            getStartedBtn.innerHTML = originalText;
+            getStartedBtn.disabled = false;
+          }, 1200);
+          // also change a stat for fun
+          document.getElementById('statUsers').textContent = '12.3k+';
+        });
+      }
+
+      // 4. docs / demo button -> show alert-like (no alert, better custom)
+      const docsBtn = document.getElementById('docsBtn');
+      if (docsBtn) {
+        docsBtn.addEventListener('click', () => {
+          // change json content quickly with a generated feature
+          const tempFeatures = [
+            {
+              icon: "fa-solid fa-wand-magic-sparkles",
+              title: "Smart UI",
+              description: "Interface adapts based on JSON schema."
+            }
+          ];
+          renderFeatures(tempFeatures);
+          currentJsonState = {
+            "demo_active": true,
+            "message": "Interactive JSON-driven demo",
+            "features": tempFeatures.map(f => ({title: f.title}))
+          };
+          updateJsonViewer(currentJsonState);
+          // restore after 2s? but let's keep interactive, user can click json viewer to switch back.
+          setTimeout(() => {
+            // revert to featureData if clickCount is even, else additional
+            if (clickCount % 2 === 0) {
+              renderFeatures(featureData);
+              currentJsonState = {
+                "productName": "NebulaOS",
+                "version": "2.4.1",
+                "features": featureData.map(f => ({ title: f.title, icon: f.icon }))
+              };
+            } else {
+              renderFeatures(additionalFeatures);
+              currentJsonState = {
+                "productName": "NebulaOS Pro",
+                "version": "3.0.0-beta",
+                "features": additionalFeatures.map(f => ({ title: f.title, icon: f.icon }))
+              };
+            }
+            updateJsonViewer(currentJsonState);
+          }, 2000);
+        });
+      }
+
+      // 5. feature card click: add extra interactivity (event delegation)
+      document.addEventListener('click', function(e) {
+        const card = e.target.closest('.feature-card');
+        if (card) {
+          const title = card.getAttribute('data-title') || card.querySelector('h3').innerText;
+          // brief console style update in JSON viewer
+          currentJsonState = {
+            ...currentJsonState,
+            "lastClickedFeature": title,
+            "timestamp": new Date().toLocaleTimeString()
+          };
+          updateJsonViewer(currentJsonState);
+          // subtle visual pulse
+          card.style.transition = '0.1s';
+          card.style.background = 'rgba(99,102,241,0.18)';
+          setTimeout(() => {
+            card.style.background = '';
+          }, 200);
+        }
+      });
+
+      // final: set switch default state visuals (off)
+      realtimeSwitch.classList.remove('on');
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Generator & Copier</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #3b82f6;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 { margin-bottom: 1.5rem; text-align: center; }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 2rem;
+    }
+
+    input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover { opacity: 0.9; }
+
+    .code-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+
+    pre {
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Code Generator</h1>
+  
+  <div class="controls">
+    <input type="text" id="componentInput" placeholder="e.g., Button, Alert, Card">
+    <button onclick="generateCode()">Generate Code</button>
+  </div>
+
+  <div id="outputContainer"></div>
+
+  <script>
+    const templates = {
+      button: {
+        html: `<button class="custom-btn">Click Me</button>`,
+        css: `.custom-btn {\n  padding: 10px 20px;\n  background: #3b82f6;\n  color: white;\n  border: none;\n  border-radius: 5px;\n  cursor: pointer;\n}`,
+        js: `document.querySelector('.custom-btn').addEventListener('click', () => {\n  alert('Button Clicked!');\n});`
+      },
+      alert: {
+        html: `<div class="alert-box">Action completed successfully!</div>`,
+        css: `.alert-box {\n  padding: 15px;\n  background: #10b981;\n  color: white;\n  border-radius: 6px;\n}`,
+        js: `console.log('Alert displayed');`
+      }
+    };
+
+    function generateCode() {
+      const type = document.getElementById('componentInput').value.toLowerCase().trim();
+      const data = templates[type] || {
+        html: `<!-- ${type || 'Component'} Structure -->\n<div class="custom-element">Container</div>`,
+        css: `/* ${type || 'Component'} Styling */\n.custom-element {\n  padding: 1rem;\n  border: 1px solid #ccc;\n}`,
+        js: `// ${type || 'Component'} Logic\nconsole.log('${type || 'Component'} initialized');`
+      };
+
+      const container = document.getElementById('outputContainer');
+      container.innerHTML = `
+        ${createCodeBox('HTML', data.html, 'html')}
+        ${createCodeBox('CSS', data.css, 'css')}
+        ${createCodeBox('JavaScript', data.js, 'js')}
+      `;
+    }
+
+    function createCodeBox(label, code, id) {
+      return `
+        <div class="code-box">
+          <div class="code-header">
+            <span>${label}</span>
+            <button class="copy-btn" onclick="copyToClipboard('${id}')">Copy</button>
+          </div>
+          <pre><code id="${id}">${escapeHtml(code)}</code></pre>
+        </div>
+      `;
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.innerText = 'Copied!';
+        setTimeout(() => btn.innerText = 'Copy', 2000);
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Initial render
+    generateCode();
+  </script>
+</body>
+</html>

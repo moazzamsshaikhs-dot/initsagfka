@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex box</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 62.5%;
+        }
+        .container{
+            height: 100vh;
+            width: 100%;
+            border: 10px solid black;
+            padding: 5px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items:start;
+            /* align-content: space-between; */
+            flex-wrap: wrap;
+        }
+        .sub-container{
+            height: 20rem;
+            width: 20rem;
+            background-color: aqua;
+            border: 5px solid black;
+        }
+        .no1{
+            background-color: red;
+            /* order: 4; */
+            align-self: center;
+        }
+         /* .no2{
+            background-color: blue;
+            order: 2;
+        }
+        .no3{
+            background-color: green;
+            order: 3;
+        }
+        .no4{
+            background-color: yellow;
+            order: 1;
+        }
+        .no5{
+            background-color: purple;
+            order: 5;
+        }
+        .no6{
+            background-color: orange;
+            order: 6;
+        }
+        .no7{
+            background-color: pink;
+            order: 7;
+        }
+        .no8{
+            background-color: brown;
+            order: 8;
+        }
+        .no9{
+            background-color: gray;
+            order: 9;
+        }  */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sub-container no1"></div>
+        <div class="sub-container no2"></div>
+        <div class="sub-container no3"></div>
+        <div class="sub-container no4"></div>
+        <div class="sub-container no5"></div>
+        <div class="sub-container no6"></div>
+        <div class="sub-container no7"></div>
+        <div class="sub-container no8"></div>
+        <div class="sub-container no9"></div>
+    </div>
+</body>
+</html>

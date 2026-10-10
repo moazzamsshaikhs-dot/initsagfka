@@ -1,0 +1,22 @@
+{
+    "fruits": [
+        {
+            "name": "Apple",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+            "color": "Red",
+            "taste": "Sweet"
+        },
+        {
+            "name": "Banana",
+            "color": "Yellow",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+            "taste": "Sweet"
+        },
+        {
+            "name": "Lemon",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+            "color": "Yellow",
+            "taste": "Sour"
+        }
+    ]
+}

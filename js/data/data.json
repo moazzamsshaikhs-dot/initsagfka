@@ -1,0 +1,25 @@
+{
+    "AllData": {
+        "home": {
+            "title": "Home Section",
+            "content": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }, 
+
+        "data": [
+            {
+                "image": "https://static.vecteezy.com/system/resources/thumbnails/059/998/621/small/elegant-floral-blossom-pink-bokeh-effect-soft-light-background-beautiful-blossoms-gentle-pink-hues-photo.jpeg",
+                "title": "Data Section 1",
+                "content": "This is the first data section."
+            },
+            {
+                "image": "https://static.vecteezy.com/system/resources/thumbnails/059/998/621/small/elegant-floral-blossom-pink-bokeh-effect-soft-light-background-beautiful-blossoms-gentle-pink-hues-photo.jpeg",
+                "title": "Data Section 2",
+                "content": "This is the second data section."
+            }
+        ],
+        "about": {
+            "title": "About Section",
+            "content": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }
+    }
+}

@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 62.5%;
+    text-decoration: none;
+}
+.contianer{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #f0f0f0;
+    gap: 20px;
+}
+.card{
+    width: 400px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+}
+.card:hover{
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    transform: translate(0,-10px);
+    -webkit-transform: translate(0,-10px);
+    -moz-transform: translate(0,-10px);
+    -ms-transform: translate(0,-10px);
+    -o-transform: translate(0,-10px);
+}
+.card img{
+    width: 100%;
+    height: 50%;
+}
+.card .body{
+    text-align: center;
+}
+.card .body h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.card .body p{
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+.card .body button{
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -ms-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+}
+.card .body button:hover{
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+    }
+}
+@media screen and (orientation: portrait) and (max-width: 950px) {
+    .card {
+        width: 100%;
+    }
+}
